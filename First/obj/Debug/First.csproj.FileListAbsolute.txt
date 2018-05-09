@@ -1,0 +1,14 @@
+C:\Users\HoaH\Desktop\New folder\First\First\bin\Debug\First.exe.config
+C:\Users\HoaH\Desktop\New folder\First\First\bin\Debug\First.exe
+C:\Users\HoaH\Desktop\New folder\First\First\bin\Debug\First.pdb
+C:\Users\HoaH\Desktop\New folder\First\First\bin\Debug\ExcelDataReader.dll
+C:\Users\HoaH\Desktop\New folder\First\First\bin\Debug\ExcelDataReader.xml
+C:\Users\HoaH\Desktop\New folder\First\First\obj\Debug\First.Form1.resources
+C:\Users\HoaH\Desktop\New folder\First\First\obj\Debug\First.Properties.Resources.resources
+C:\Users\HoaH\Desktop\New folder\First\First\obj\Debug\First.csproj.GenerateResource.cache
+C:\Users\HoaH\Desktop\New folder\First\First\obj\Debug\First.csproj.CoreCompileInputs.cache
+C:\Users\HoaH\Desktop\New folder\First\First\obj\Debug\First.csproj.CopyComplete
+C:\Users\HoaH\Desktop\New folder\First\First\obj\Debug\First.exe
+C:\Users\HoaH\Desktop\New folder\First\First\obj\Debug\First.pdb
+C:\Users\HoaH\Desktop\New folder\First\First\obj\Debug\First.csprojResolveAssemblyReference.cache
+C:\Users\HoaH\Desktop\New folder\First\First\obj\Debug\First.csproj.ResolveComReference.cache
