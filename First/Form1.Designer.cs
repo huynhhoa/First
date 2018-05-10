@@ -30,7 +30,6 @@
         {
             this.dataGV1 = new System.Windows.Forms.DataGridView();
             this.btnPF = new System.Windows.Forms.Button();
-            this.txtSN = new System.Windows.Forms.TextBox();
             this.txtPF = new System.Windows.Forms.TextBox();
             this.btnLoadFile = new System.Windows.Forms.Button();
             this.dataGV2 = new System.Windows.Forms.DataGridView();
@@ -84,7 +83,6 @@
             this.Column45 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnSave = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
@@ -98,8 +96,7 @@
             // dataGV1
             // 
             this.dataGV1.AllowUserToOrderColumns = true;
-            this.dataGV1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.dataGV1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGV1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGV1.Location = new System.Drawing.Point(11, 19);
@@ -110,24 +107,13 @@
             // btnPF
             // 
             this.btnPF.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnPF.Location = new System.Drawing.Point(351, 23);
+            this.btnPF.Location = new System.Drawing.Point(676, 23);
             this.btnPF.Name = "btnPF";
             this.btnPF.Size = new System.Drawing.Size(75, 23);
             this.btnPF.TabIndex = 1;
             this.btnPF.Text = "Browser";
             this.btnPF.UseVisualStyleBackColor = true;
             this.btnPF.Click += new System.EventHandler(this.btnPF_Click);
-            // 
-            // txtSN
-            // 
-            this.txtSN.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtSN.Location = new System.Drawing.Point(94, 59);
-            this.txtSN.Name = "txtSN";
-            this.txtSN.Size = new System.Drawing.Size(216, 20);
-            this.txtSN.TabIndex = 3;
-            this.txtSN.Text = "E.g: Sheet1";
             // 
             // txtPF
             // 
@@ -136,14 +122,14 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtPF.Location = new System.Drawing.Point(94, 23);
             this.txtPF.Name = "txtPF";
-            this.txtPF.Size = new System.Drawing.Size(216, 20);
+            this.txtPF.Size = new System.Drawing.Size(541, 20);
             this.txtPF.TabIndex = 4;
             // 
             // btnLoadFile
             // 
             this.btnLoadFile.AllowDrop = true;
-            this.btnLoadFile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnLoadFile.Location = new System.Drawing.Point(605, 50);
+            this.btnLoadFile.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.btnLoadFile.Location = new System.Drawing.Point(367, 234);
             this.btnLoadFile.Name = "btnLoadFile";
             this.btnLoadFile.Size = new System.Drawing.Size(75, 23);
             this.btnLoadFile.TabIndex = 5;
@@ -456,7 +442,7 @@
             // 
             this.btnSave.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.btnSave.AutoSize = true;
-            this.btnSave.Location = new System.Drawing.Point(381, 415);
+            this.btnSave.Location = new System.Drawing.Point(367, 415);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);
             this.btnSave.TabIndex = 8;
@@ -476,40 +462,25 @@
             this.label1.TabIndex = 9;
             this.label1.Text = "Path File";
             // 
-            // label2
-            // 
-            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(9, 66);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(66, 13);
-            this.label2.TabIndex = 9;
-            this.label2.Text = "Sheet Name";
-            // 
             // groupBox1
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.Controls.Add(this.btnPF);
-            this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.txtSN);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.txtPF);
             this.groupBox1.Location = new System.Drawing.Point(12, 8);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(450, 97);
+            this.groupBox1.Size = new System.Drawing.Size(775, 69);
             this.groupBox1.TabIndex = 10;
             this.groupBox1.TabStop = false;
             // 
             // groupBox2
             // 
-            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox2.Controls.Add(this.dataGV1);
-            this.groupBox2.Location = new System.Drawing.Point(13, 112);
+            this.groupBox2.Location = new System.Drawing.Point(12, 86);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(775, 139);
             this.groupBox2.TabIndex = 11;
@@ -537,8 +508,8 @@
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btnLoadFile);
+            this.Controls.Add(this.groupBox1);
             this.Name = "Form1";
             this.Text = "Excel ";
             ((System.ComponentModel.ISupportInitialize)(this.dataGV1)).EndInit();
@@ -556,7 +527,6 @@
 
         private System.Windows.Forms.DataGridView dataGV1;
         private System.Windows.Forms.Button btnPF;
-        private System.Windows.Forms.TextBox txtSN;
         private System.Windows.Forms.TextBox txtPF;
         private System.Windows.Forms.Button btnLoadFile;
         private System.Windows.Forms.DataGridView dataGV2;
@@ -610,7 +580,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column44;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column45;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox3;

@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Data.OleDb;
 using Excel = Microsoft.Office.Interop.Excel;
 using app = Microsoft.Office.Interop.Excel.Application;
+using Microsoft.VisualBasic.FileIO;
 namespace First
 {
     public partial class Form1 : Form
@@ -18,34 +19,77 @@ namespace First
         {
             InitializeComponent();
         }
-       //Mo file excel
+        //Mo file excel
         private void btnPF_Click(object sender, EventArgs e)
         {
-            OpenFileDialog openFileDialog1 = new OpenFileDialog();
-            if(openFileDialog1.ShowDialog()==System.Windows.Forms.DialogResult.OK)
-            {
-                this.txtPF.Text = openFileDialog1.FileName;
-            }
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            // To list only csv files, we need to add this filter
+            openFileDialog.Filter = "|*.csv";
+            DialogResult result = openFileDialog.ShowDialog();
 
-        }
-        private DataSet ds;
-        private DataTable dt;
-        private void btnLoadFile_Click(object sender, EventArgs e)
-        {
-         
+            if (result == DialogResult.OK)
+            {
+                try
+                {
+                    txtPF.Text = openFileDialog.FileName;
+                }
+
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Please Note", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
             try
             {
-                OleDbConnection connection = new OleDbConnection();
-                connection = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Extended Properties=Excel 8.0;Data Source=" + txtPF.Text); //Excel 97-2003, .xls
-                string excelQuery = @"Select * FROM [" + txtSN.Text + "$]";
-                connection.Open();
-                OleDbCommand cmd = new OleDbCommand(excelQuery, connection);
-                OleDbDataAdapter adapter = new OleDbDataAdapter();
-                adapter.SelectCommand = cmd;
-                ds = new DataSet();
-                adapter.Fill(ds);
-                dt = ds.Tables[0];
-                dataGV1.DataSource = dt.DefaultView;
+
+                dataGV1.DataSource = GetDataTableFromCSVFile(txtPF.Text);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Import CSV File", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        private static DataTable GetDataTableFromCSVFile(string csvfilePath)
+        {
+            DataTable csvData = new DataTable();
+            using (TextFieldParser csvReader = new TextFieldParser(csvfilePath))
+            {
+                csvReader.SetDelimiters(new string[] { "," });
+                csvReader.HasFieldsEnclosedInQuotes = true;
+
+                //Read columns from CSV file, remove this line if columns not exits  
+                string[] colFields = csvReader.ReadFields();
+
+                foreach (string column in colFields)
+                {
+                    DataColumn datecolumn = new DataColumn(column);
+                    datecolumn.AllowDBNull = true;
+                    csvData.Columns.Add(datecolumn);
+                }
+
+                while (!csvReader.EndOfData)
+                {
+                    string[] fieldData = csvReader.ReadFields();
+                    //Making empty value as null
+                    for (int i = 0; i < fieldData.Length; i++)
+                    {
+                        if (fieldData[i] == "")
+                        {
+                            fieldData[i] = null;
+                        }
+                    }
+                    csvData.Rows.Add(fieldData);
+                }
+            }
+            return csvData;
+        }
+
+        private void btnLoadFile_Click(object sender, EventArgs e)
+        {
+            DataTable dt = new DataTable();
+            dt = GetDataTableFromCSVFile(txtPF.Text); //lay du lieu cua datagv1
+            try
+            {
                 //them hang
                 foreach (DataRow dr in dt.Rows )
                 {
@@ -124,7 +168,6 @@ namespace First
                 }
 
 
-                connection.Close();
             }
             catch (Exception ex)
             {
@@ -144,7 +187,7 @@ namespace First
                 return "F";
             else if (chuoi1 == "Chocolates, Candies and Gums" || chuoi1 == "Cigarettes" || chuoi1 == "Wine and Spirits")
                 return "W";
-
+            
             return "S";
         }
         //nhom2
@@ -187,55 +230,49 @@ namespace First
        
         private void btnSave_Click(object sender, EventArgs e)
         {
-            
-            // creating Excel Application  
-            Microsoft.Office.Interop.Excel._Application app = new Microsoft.Office.Interop.Excel.Application();
-            // creating new WorkBook within Excel application  
-            Microsoft.Office.Interop.Excel._Workbook workbook = app.Workbooks.Add(Type.Missing);
-            // creating new Excelsheet in workbook  
-            Microsoft.Office.Interop.Excel._Worksheet worksheet = null;
-            // see the excel sheet behind the program  
-            app.Visible = true;
-            // get the reference of first sheet. By default its name is Sheet1.  
-            // store its reference to worksheet  
-            worksheet = workbook.Sheets["Sheet1"];
-            worksheet = workbook.ActiveSheet;
-            // changing the name of active sheet  
-            worksheet.Name = "ITEM";
-            // storing header part in Excel  
+            DataTable dt = (DataTable)dataGV2.DataSource;
+            // Get an excel instance
+            Microsoft.Office.Interop.Excel.Application excel = new Microsoft.Office.Interop.Excel.Application();
 
+            // Get a workbook
+            Microsoft.Office.Interop.Excel._Workbook wb = excel.Workbooks.Add();
 
-            app obj = new app();
-            obj.Application.Workbooks.Add(Type.Missing);
-            obj.Columns.ColumnWidth = 25;
-            for (int i = 1; i < dataGV2.Columns.Count + 1; i++)
+            // Get a worksheet
+            Microsoft.Office.Interop.Excel._Worksheet ws = wb.Worksheets.Add();
+            ws.Name = "ITEM";
+
+            // Add column names to the first row
+           // int col = 1;
+            //foreach (DataColumn c in dt.Columns)
+            //{
+            //    ws.Cells[1, col] = c.ColumnName;
+            //    col++;
+            //}
+            for (int j = 1; j < dataGV2.Columns.Count + 1; j++)
             {
-                worksheet.Cells[1, i] = dataGV2.Columns[i - 1].HeaderText;
+                ws.Cells[1, j] = dataGV2.Columns[j - 1].HeaderText;
             }
-            // storing Each row and column value to excel sheet  
-            for (int i = 0; i < dataGV2.Rows.Count - 1; i++)
+            // Create a 2D array with the data from the table
+            int i = 0;
+            string[,] data = new string[dt.Rows.Count, dt.Columns.Count];
+            foreach (DataRow row in dt.Rows)
             {
-                for (int j = 0; j < dataGV2.Columns.Count; j++)
+                int j = 0;
+                foreach (DataColumn c in dt.Columns)
                 {
-                    if (dataGV2.Rows[i].Cells[j].Value != null)
-                        worksheet.Cells[i + 2, j + 1] = dataGV2.Rows[i].Cells[j].Value.ToString();
-                   
+                    data[i, j] = row[c].ToString();
+                    j++;
                 }
+                i++;
             }
 
-           //          save the application
-           //SaveFileDialog saveDialog = new SaveFileDialog();
-           // saveDialog.Filter = "Excel files (*.xlsx)|*.xlsx|All files (*.*)|*.*";
-           // saveDialog.FilterIndex = 2;
-           // if (saveDialog.ShowDialog() == DialogResult.OK)
-           // {
+            // Set the range value to the 2D array
+            ws.Range[ws.Cells[2, 1], ws.Cells[dt.Rows.Count + 1, dt.Columns.Count]].value = data;
 
-           //     export2Excel(dataGV2, saveDialog.FileName);
-           //     MessageBox.Show("Export Successful");
-           // }
-               workbook.SaveAs("C:\\output.xls", Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Microsoft.Office.Interop.Excel.XlSaveAsAccessMode.xlExclusive, Type.Missing, Type.Missing, Type.Missing, Type.Missing);
-            // Exit from the application  
-            app.Quit();
+            // Auto fit columns and rows, show excel, save.. etc
+            excel.Columns.AutoFit();
+            excel.Rows.AutoFit();
+            excel.Visible = true;
         }
     }
 }
