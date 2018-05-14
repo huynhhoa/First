@@ -28,10 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.dataGV1 = new System.Windows.Forms.DataGridView();
             this.btnPF = new System.Windows.Forms.Button();
             this.txtPF = new System.Windows.Forms.TextBox();
-            this.btnLoadFile = new System.Windows.Forms.Button();
             this.dataGV2 = new System.Windows.Forms.DataGridView();
             this.btnSave = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -53,13 +53,14 @@
             this.dataGV1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGV1.Location = new System.Drawing.Point(11, 19);
             this.dataGV1.Name = "dataGV1";
-            this.dataGV1.Size = new System.Drawing.Size(758, 114);
+            this.dataGV1.ReadOnly = true;
+            this.dataGV1.Size = new System.Drawing.Size(758, 124);
             this.dataGV1.TabIndex = 0;
             // 
             // btnPF
             // 
             this.btnPF.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnPF.Location = new System.Drawing.Point(676, 23);
+            this.btnPF.Location = new System.Drawing.Point(665, 21);
             this.btnPF.Name = "btnPF";
             this.btnPF.Size = new System.Drawing.Size(75, 23);
             this.btnPF.TabIndex = 1;
@@ -77,39 +78,29 @@
             this.txtPF.Size = new System.Drawing.Size(541, 20);
             this.txtPF.TabIndex = 4;
             // 
-            // btnLoadFile
-            // 
-            this.btnLoadFile.AllowDrop = true;
-            this.btnLoadFile.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.btnLoadFile.Location = new System.Drawing.Point(367, 234);
-            this.btnLoadFile.Name = "btnLoadFile";
-            this.btnLoadFile.Size = new System.Drawing.Size(75, 23);
-            this.btnLoadFile.TabIndex = 5;
-            this.btnLoadFile.Text = "Convert File";
-            this.btnLoadFile.UseVisualStyleBackColor = true;
-            this.btnLoadFile.Click += new System.EventHandler(this.btnLoadFile_Click);
-            // 
             // dataGV2
             // 
-            this.dataGV2.AllowUserToOrderColumns = true;
+            this.dataGV2.AllowUserToAddRows = false;
+            this.dataGV2.AllowUserToDeleteRows = false;
             this.dataGV2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGV2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGV2.Location = new System.Drawing.Point(12, 19);
             this.dataGV2.Name = "dataGV2";
-            this.dataGV2.Size = new System.Drawing.Size(758, 125);
+            this.dataGV2.ReadOnly = true;
+            this.dataGV2.Size = new System.Drawing.Size(758, 126);
             this.dataGV2.TabIndex = 6;
             // 
             // btnSave
             // 
             this.btnSave.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.btnSave.AutoSize = true;
-            this.btnSave.Location = new System.Drawing.Point(367, 415);
+            this.btnSave.Location = new System.Drawing.Point(367, 417);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);
             this.btnSave.TabIndex = 8;
-            this.btnSave.Text = "Save File";
+            this.btnSave.Text = "Open File";
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
@@ -143,9 +134,10 @@
             this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox2.Controls.Add(this.dataGV1);
+            this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox2.Location = new System.Drawing.Point(12, 86);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(775, 139);
+            this.groupBox2.Size = new System.Drawing.Size(775, 154);
             this.groupBox2.TabIndex = 11;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "File Import";
@@ -156,9 +148,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox3.Controls.Add(this.dataGV2);
+            this.groupBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox3.Location = new System.Drawing.Point(12, 258);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(776, 150);
+            this.groupBox3.Size = new System.Drawing.Size(776, 151);
             this.groupBox3.TabIndex = 12;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "After covert";
@@ -171,11 +164,10 @@
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.btnLoadFile);
             this.Controls.Add(this.groupBox1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
-            this.Text = "Excel ";
-            this.Load += new System.EventHandler(this.Form1_Load);
+            this.Text = "Convert Excel ";
             ((System.ComponentModel.ISupportInitialize)(this.dataGV1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGV2)).EndInit();
             this.groupBox1.ResumeLayout(false);
@@ -192,13 +184,12 @@
         private System.Windows.Forms.DataGridView dataGV1;
         private System.Windows.Forms.Button btnPF;
         private System.Windows.Forms.TextBox txtPF;
-        private System.Windows.Forms.Button btnLoadFile;
-        private System.Windows.Forms.DataGridView dataGV2;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.DataGridView dataGV2;
     }
 }
 
